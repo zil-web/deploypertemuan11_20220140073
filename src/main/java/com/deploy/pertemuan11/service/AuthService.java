@@ -4,6 +4,7 @@ import com.deploy.pertemuan11.model.Profile;
 import com.deploy.pertemuan11.model.User;
 import com.deploy.pertemuan11.model.dto.RegisterRequest;
 import com.deploy.pertemuan11.repository.UserRepository;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,10 +22,10 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void  register(RegisterRequest register){
+    public void  register(RegisterRequest request){
         User user = User.builder()
                 .id(UUID.randomUUID().toString())
-                .username(request.getusername())
+                .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
 
@@ -32,8 +33,8 @@ public class AuthService {
                 .id(UUID.randomUUID().toString())
                 .nama(request.getNama())
                 .alamat(request.getAlamat())
-                .User(user)
-                .Build();
+                .user(user)
+                .build();
 
         user.setProfile(profile);
 
